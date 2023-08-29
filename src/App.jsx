@@ -10,10 +10,14 @@ function App() {
     expirationYear: "",
     cvcNumber: "",
   });
-  function handleChange() {
-    setCardInfo;
+  function handleChange(e) {
+    setCardInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
-  function handleConfirm() {}
+  function handleConfirm() {
+    alert("pressed confirm");
+  }
+  const { name, cardNumber, expirationMonth, expirationYear, cvcNumber } =
+    cardInfo;
   return (
     <div className="flex flex-col h-screen bg-lightGrayViolet 2xl:flex-row">
       <div className="relative bg-[url('/images/bg-main-mobile.png')] w-screen h-2/6 2xl:bg-[url('/images/bg-main-desktop.png')] 2xl:h-screen 2xl:w-2/6">
@@ -40,11 +44,11 @@ function App() {
         </div>
       </div>
       <Form
-        name={cardInfo.name}
-        cardNumber={cardInfo.cardNumber}
-        expirationMonth={cardInfo.expirationMonth}
-        expirationYear={cardInfo.expirationYear}
-        cvcNumber={cardInfo.cvcNumber}
+        name={name}
+        cardNumber={cardNumber}
+        expirationMonth={expirationMonth}
+        expirationYear={expirationYear}
+        cvcNumber={cvcNumber}
         handleChange={handleChange}
         handleConfirm={handleConfirm}
       />

@@ -26,7 +26,7 @@ export default function Form({
         CARD NUMBER
         <input
           id="card-number"
-          name="card-number"
+          name="cardNumber"
           type="text"
           maxLength="16"
           placeholder="e.g. 1234 5678 9123 0000"
@@ -40,7 +40,7 @@ export default function Form({
         <div className="flex flex-row gap-3">
           <input
             className="w-[4.5rem] border border-gray-400 rounded-md px-4 py-2 text-[18px] active:border-darkGrayViolet"
-            name="month"
+            name="expirationMonth"
             type="text"
             maxLength="2"
             placeholder="MM"
@@ -49,7 +49,7 @@ export default function Form({
           />
           <input
             className="w-[4.5rem] border border-gray-400 rounded-md px-4 py-2 text-[18px] active:border-darkGrayViolet"
-            name="year"
+            name="expirationYear"
             type="text"
             maxLength="2"
             placeholder="YY"
@@ -62,7 +62,7 @@ export default function Form({
         CVC
         <input
           className="border border-gray-400 rounded-md px-4 py-2 text-[18px] active:border-darkGrayViolet"
-          name="cvc"
+          name="cvcNumber"
           type="text"
           maxLength="3"
           placeholder="e.g. 123"
@@ -71,7 +71,7 @@ export default function Form({
         />
       </label>
       <button
-        className="col-span-5 border p-2 rounded-lg bg-veryDarkGrayViolet text-white text-[18px]"
+        className="col-span-6 border p-2 rounded-lg bg-veryDarkGrayViolet text-white text-[18px]"
         type="submit"
         name="submit"
         onClick={handleConfirm}
