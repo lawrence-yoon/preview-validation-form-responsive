@@ -10,14 +10,21 @@ function App() {
     expirationYear: "",
     cvcNumber: "",
   });
+  const { name, cardNumber, expirationMonth, expirationYear, cvcNumber } =
+    cardInfo;
   function handleChange(e) {
     setCardInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
   function handleConfirm() {
     alert("pressed confirm");
   }
-  const { name, cardNumber, expirationMonth, expirationYear, cvcNumber } =
-    cardInfo;
+  const formattedCardNumber = () => {
+    let string = "";
+    for (let i = 0; i < cardInfo.cardNumber.length; i += 4) {
+      string = string + cardInfo.cardNumber.substring(i, i + 4) + " ";
+    }
+    return string;
+  };
   return (
     <div className="flex flex-col h-screen 2xl:flex-row">
       <div className="relative bg-[url('/images/bg-main-mobile.png')] w-screen h-2/6 2xl:bg-[url('/images/bg-main-desktop.png')] 2xl:h-screen 2xl:w-2/6">
@@ -29,7 +36,9 @@ function App() {
         <div className="absolute bg-[url('/images/bg-card-front.png')] bg-cover bottom-[-2.875rem] left-[1.125rem] w-[279px] h-[153px] text-lightGrayViolet p-5">
           <img className="h-[2rem] w-auto" src="/images/card-logo.svg"></img>
           <p className="pt-8 text-lg font-medium tracking-widest">
-            {cardInfo.cardNumber ? cardInfo.cardNumber : "000000000000000"}
+            {formattedCardNumber()
+              ? formattedCardNumber()
+              : "0000 0000 0000 0000"}
           </p>
           <div className="flex flex-row justify-between pt-2 text-[10px] tracking-wider">
             <p className="uppercase">
