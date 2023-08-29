@@ -19,7 +19,7 @@ function App() {
   const { name, cardNumber, expirationMonth, expirationYear, cvcNumber } =
     cardInfo;
   return (
-    <div className="flex flex-col h-screen bg-lightGrayViolet 2xl:flex-row">
+    <div className="flex flex-col h-screen 2xl:flex-row">
       <div className="relative bg-[url('/images/bg-main-mobile.png')] w-screen h-2/6 2xl:bg-[url('/images/bg-main-desktop.png')] 2xl:h-screen 2xl:w-2/6">
         <div className="absolute bg-[url('/images/bg-card-back.png')] bg-cover top-[1.75rem] right-[1.125rem] w-[279px] h-[153px] text-lightGrayViolet">
           <p className="absolute top-[4.175rem] right-[2.4rem] text-[10px] tracking-widest">
