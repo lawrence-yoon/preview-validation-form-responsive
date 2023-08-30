@@ -20,7 +20,7 @@ export default function Form({
           type="text"
           maxLength="70"
           placeholder="e.g. Jane Appleseed"
-          className={`border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline ${
+          className={`border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline outline-2 ${
             errorThrown.name
               ? "outline-errorRed border-transparent"
               : "outline-transparent active:outline-darkGrayViolet focus:outline-darkGrayViolet"
@@ -38,7 +38,7 @@ export default function Form({
           type="text"
           maxLength="16"
           placeholder="e.g. 1234 5678 9123 0000"
-          className={`border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline ${
+          className={`border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline outline-2 ${
             errorThrown.cardNumber
               ? "outline-errorRed border-transparent"
               : "outline-transparent active:outline-darkGrayViolet focus:outline-darkGrayViolet"
@@ -54,7 +54,7 @@ export default function Form({
         EXP. DATE (MM/YY)
         <div className="flex flex-row gap-3">
           <input
-            className={`w-[4.5rem] border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline ${
+            className={`w-[4.5rem] border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline outline-2 ${
               errorThrown.expirationMonth
                 ? "outline-errorRed border-transparent"
                 : "outline-transparent active:outline-darkGrayViolet focus:outline-darkGrayViolet"
@@ -67,7 +67,7 @@ export default function Form({
             value={expirationMonth}
           />
           <input
-            className={`w-[4.5rem] border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline ${
+            className={`w-[4.5rem] border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline outline-2 ${
               errorThrown.expirationYear
                 ? "outline-errorRed border-transparent"
                 : "outline-transparent active:outline-darkGrayViolet focus:outline-darkGrayViolet"
@@ -89,7 +89,7 @@ export default function Form({
       <label className="relative flex flex-col col-span-3 text-xs tracking-widest">
         CVC
         <input
-          className={`border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline ${
+          className={`border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline outline-2 ${
             errorThrown.cvcNumber
               ? "outline-errorRed border-transparent"
               : "outline-transparent active:outline-darkGrayViolet focus:outline-darkGrayViolet"
@@ -106,7 +106,7 @@ export default function Form({
         ) : null}
       </label>
       <button
-        className="col-span-6 border p-2 rounded-lg bg-veryDarkGrayViolet text-white text-[18px]"
+        className="col-span-6 border py-2.5 rounded-lg bg-veryDarkGrayViolet text-white text-[18px]"
         type="submit"
         name="submit"
         onClick={handleConfirm}
