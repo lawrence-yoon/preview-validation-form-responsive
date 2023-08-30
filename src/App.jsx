@@ -1,5 +1,6 @@
 // import { useState } from "react";
 import Form from "./components/Form";
+import CompleteVerification from "./components/CompleteVerification";
 import { useState } from "react";
 
 function App() {
@@ -117,6 +118,9 @@ function App() {
       alert("this is where we fire the render complete element");
     }
   }
+  function handleComplete() {
+    alert("continue pressed");
+  }
   const formattedCardNumber = () => {
     let string = "";
     for (let i = 0; i < cardInfo.cardNumber.length; i += 4) {
@@ -154,7 +158,7 @@ function App() {
         </div>
       </div>
       {isConfirmed ? (
-        <CompleteVerification />
+        <CompleteVerification handleComplete={handleComplete} />
       ) : (
         <Form
           name={name}
@@ -167,21 +171,6 @@ function App() {
           handleConfirm={handleConfirm}
         />
       )}
-    </div>
-  );
-}
-
-function CompleteVerification() {
-  return (
-    <div className="flex flex-col items-center w-full max-w-sm px-7 pt-24 gap-4">
-      <img className="h-[5rem] w-fit" src="/images/icon-complete.svg" />
-      <p className="pt-4 text-[1.625rem] tracking-widest">THANK YOU!</p>
-      <p className="text-[18px] pb-4 text-darkGrayViolet">
-        We&apos;ve added your card details
-      </p>
-      <button className="border w-full py-2.5 rounded-lg bg-veryDarkGrayViolet text-white text-[18px]">
-        Continue
-      </button>
     </div>
   );
 }
