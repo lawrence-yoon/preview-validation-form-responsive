@@ -3,6 +3,14 @@ import Form from "./components/Form";
 import { useState } from "react";
 
 function App() {
+  const [errorThrown, setErrorThrown] = useState({
+    name: "",
+    cardNumber: "",
+    expirationMonth: "",
+    expirationYear: "",
+    cvcNumber: "",
+  });
+  const [isFirstRender, setIsFirstRender] = useState(true);
   const [cardInfo, setCardInfo] = useState({
     name: "",
     cardNumber: "",
@@ -16,7 +24,96 @@ function App() {
     setCardInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
   function handleConfirm() {
-    alert("pressed confirm");
+    if (cardInfo.name.length === 0) {
+      setErrorThrown((prev) => ({ ...prev, name: "Can't be blank" }));
+    } else {
+      setErrorThrown((prev) => ({
+        ...prev,
+        name: "",
+      }));
+    }
+    if (cardInfo.cardNumber.length === 0) {
+      setErrorThrown((prev) => ({ ...prev, cardNumber: "Can't be blank" }));
+    } else if (cardInfo.cardNumber.length != 16) {
+      setErrorThrown((prev) => ({ ...prev, cardNumber: "Incomplete field" }));
+    } else if (isNaN(cardInfo.cardNumber)) {
+      setErrorThrown((prev) => ({
+        ...prev,
+        cardNumber: "Wrong format, numbers only",
+      }));
+    } else {
+      setErrorThrown((prev) => ({
+        ...prev,
+        cardNumber: "",
+      }));
+    }
+    if (cardInfo.expirationMonth.length === 0) {
+      setErrorThrown((prev) => ({
+        ...prev,
+        expirationMonth: "Can't be blank",
+      }));
+    } else if (cardInfo.expirationMonth.length != 2) {
+      setErrorThrown((prev) => ({
+        ...prev,
+        expirationMonth: "Incomplete field",
+      }));
+    } else if (isNaN(cardInfo.expirationMonth)) {
+      setErrorThrown((prev) => ({
+        ...prev,
+        expirationMonth: "Wrong format, numbers only",
+      }));
+    } else {
+      setErrorThrown((prev) => ({
+        ...prev,
+        expirationMonth: "",
+      }));
+    }
+
+    if (cardInfo.expirationYear.length === 0) {
+      setErrorThrown((prev) => ({ ...prev, expirationYear: "Can't be blank" }));
+    } else if (cardInfo.expirationYear.length != 2) {
+      setErrorThrown((prev) => ({
+        ...prev,
+        expirationYear: "Incomplete field",
+      }));
+    } else if (isNaN(cardInfo.expirationYear)) {
+      setErrorThrown((prev) => ({
+        ...prev,
+        expirationYear: "Wrong format, numbers only",
+      }));
+    } else {
+      setErrorThrown((prev) => ({
+        ...prev,
+        expirationYear: "",
+      }));
+    }
+
+    if (cardInfo.cvcNumber.length === 0) {
+      setErrorThrown((prev) => ({ ...prev, cvcNumber: "Can't be blank" }));
+    } else if (cardInfo.cvcNumber.length != 3) {
+      setErrorThrown((prev) => ({ ...prev, cvcNumber: "Incomplete field" }));
+    } else if (isNaN(cardInfo.cvcNumber)) {
+      setErrorThrown((prev) => ({
+        ...prev,
+        cvcNumber: "Wrong format, numbers only",
+      }));
+    } else {
+      setErrorThrown((prev) => ({
+        ...prev,
+        cvcNumber: "",
+      }));
+    }
+    setIsFirstRender(false);
+    if (
+      !errorThrown.name &&
+      !errorThrown.cardNumber &&
+      !errorThrown.expirationMonth &&
+      !errorThrown.expirationYear &&
+      !errorThrown.cvcNumber &&
+      !isFirstRender
+    ) {
+      alert("this is where we fire the render complete element");
+    }
   }
   const formattedCardNumber = () => {
     let string = "";
@@ -28,7 +125,7 @@ function App() {
   return (
     <div className="flex flex-col h-screen 2xl:flex-row">
       <div className="bg-[url('/images/bg-main-mobile.png')] bg-cover w-screen h-2/6 2xl:bg-[url('/images/bg-main-desktop.png')] 2xl:h-screen 2xl:w-2/6">
-        <div className="relative w-full max-w-[375px] min-h-[222px] h-full  mx-auto ">
+        <div className="relative w-full max-w-[375px] min-h-[222px] h-full mx-auto ">
           <div className="absolute bg-[url('/images/bg-card-back.png')] bg-cover top-[1.75rem] right-[1.125rem] w-[279px] h-[153px] text-lightGrayViolet">
             <p className="absolute top-[4.175rem] right-[2.4rem] text-[10px] tracking-widest">
               {cardInfo.cvcNumber ? cardInfo.cvcNumber : "000"}
@@ -60,6 +157,7 @@ function App() {
         expirationMonth={expirationMonth}
         expirationYear={expirationYear}
         cvcNumber={cvcNumber}
+        errorThrown={errorThrown}
         handleChange={handleChange}
         handleConfirm={handleConfirm}
       />
