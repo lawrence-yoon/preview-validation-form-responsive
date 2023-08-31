@@ -10,8 +10,8 @@ export default function Form({
   handleConfirm = () => {},
 }) {
   return (
-    <div className="grid grid-cols-6 w-fit max-w-sm px-7 pt-24 gap-6 mx-auto">
-      <label className="relative flex flex-col col-span-6 text-xs tracking-widest">
+    <div className="grid grid-cols-6 w-fit max-w-sm h-fit mx-auto my-auto px-7 pt-20 gap-6">
+      <label className="relative flex flex-col col-span-6 text-xs tracking-widest h-fit">
         CARDHOLDER NAME
         <input
           autoFocus
@@ -30,7 +30,7 @@ export default function Form({
         />
         {errorThrown.name ? <ErrorLabel message={errorThrown.name} /> : null}
       </label>
-      <label className="relative flex flex-col col-span-6 text-xs tracking-widest">
+      <label className="relative flex flex-col col-span-6 text-xs tracking-widest h-fit">
         CARD NUMBER
         <input
           id="card-number"
@@ -50,7 +50,7 @@ export default function Form({
           <ErrorLabel message={errorThrown.cardNumber} />
         ) : null}
       </label>
-      <label className="relative flex flex-col col-span-3 text-xs tracking-widest whitespace-nowrap">
+      <label className="relative flex flex-col col-span-3 text-xs tracking-widest h-fit whitespace-nowrap">
         EXP. DATE (MM/YY)
         <div className="flex flex-row gap-3">
           <input
@@ -86,7 +86,7 @@ export default function Form({
           />
         ) : null}
       </label>
-      <label className="relative flex flex-col col-span-3 text-xs tracking-widest">
+      <label className="relative flex flex-col col-span-3 text-xs tracking-widest h-fit">
         CVC
         <input
           className={`border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline outline-2 ${
@@ -106,7 +106,7 @@ export default function Form({
         ) : null}
       </label>
       <button
-        className="col-span-6 border py-2.5 rounded-lg bg-veryDarkGrayViolet text-white text-[18px]"
+        className="col-span-6 border py-2.5 rounded-lg bg-veryDarkGrayViolet text-white text-[18px] h-fit"
         type="submit"
         name="submit"
         onClick={handleConfirm}

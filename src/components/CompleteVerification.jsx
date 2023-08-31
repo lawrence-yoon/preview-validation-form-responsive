@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 export default function CompleteVerification({ handleComplete }) {
   return (
-    <div className="flex flex-col items-center w-full max-w-sm px-7 pt-24 gap-4">
+    <div className="flex flex-col items-center w-full max-w-sm px-7 pt-24 gap-4 mx-auto my-auto">
       <img className="h-[5rem] w-fit" src="/images/icon-complete.svg" />
       <p className="pt-4 text-[1.625rem] tracking-widest">THANK YOU!</p>
       <p className="text-[18px] pb-4 text-darkGrayViolet">
