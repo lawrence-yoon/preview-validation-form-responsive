@@ -130,8 +130,8 @@ function App() {
   };
   return (
     <div className="flex flex-col h-screen 2xl:flex-row">
-      <div className="bg-[url('/images/bg-main-mobile.png')] bg-cover w-screen h-2/6 2xl:bg-[url('/images/bg-main-desktop.png')] 2xl:h-screen 2xl:w-2/6">
-        <div className="relative w-full max-w-[375px] min-h-[222px] h-full mx-auto 2xl:max-w-full">
+      <div className="flex items-center bg-[url('/images/bg-main-mobile.png')] bg-cover w-screen h-2/6 2xl:bg-[url('/images/bg-main-desktop.png')] 2xl:h-screen 2xl:w-2/6">
+        <div className="relative w-full max-w-[375px] min-h-[222px] max-h-[667px] mx-auto 2xl:max-w-full 2xl:h-[434px] 2xl:max-h-full">
           <div className="absolute bg-[url('/images/bg-card-back.png')] bg-cover top-[1.75rem] right-[1.125rem] w-[279px] h-[153px] text-lightGrayViolet 2xl:top-auto 2xl:bottom-[16rem] 2xl:-right-[8.75rem] 2xl:scale-110">
             <p className="absolute top-[4.175rem] right-[2.4rem] text-[10px] tracking-widest">
               {cardInfo.cvcNumber ? cardInfo.cvcNumber : "000"}
