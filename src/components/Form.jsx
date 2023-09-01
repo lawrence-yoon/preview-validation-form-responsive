@@ -5,7 +5,7 @@ export default function Form({
   expirationMonth,
   expirationYear,
   cvcNumber,
-  errorThrown,
+  errorMessage,
   handleChange = () => {},
   handleConfirm = () => {},
 }) {
@@ -21,14 +21,14 @@ export default function Form({
           maxLength="70"
           placeholder="e.g. Jane Appleseed"
           className={`border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline outline-2 ${
-            errorThrown.name
+            errorMessage.name
               ? "outline-errorRed border-transparent"
               : "outline-transparent active:outline-darkGrayViolet focus:outline-darkGrayViolet"
           } `}
           onChange={handleChange}
           value={name}
         />
-        {errorThrown.name ? <ErrorLabel message={errorThrown.name} /> : null}
+        {errorMessage.name ? <ErrorLabel message={errorMessage.name} /> : null}
       </label>
       <label className="relative flex flex-col col-span-6 text-xs tracking-widest h-fit">
         CARD NUMBER
@@ -39,15 +39,15 @@ export default function Form({
           maxLength="16"
           placeholder="e.g. 1234 5678 9123 0000"
           className={`border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline outline-2 ${
-            errorThrown.cardNumber
+            errorMessage.cardNumber
               ? "outline-errorRed border-transparent"
               : "outline-transparent active:outline-darkGrayViolet focus:outline-darkGrayViolet"
           }`}
           onChange={handleChange}
           value={cardNumber}
         />
-        {errorThrown.cardNumber ? (
-          <ErrorLabel message={errorThrown.cardNumber} />
+        {errorMessage.cardNumber ? (
+          <ErrorLabel message={errorMessage.cardNumber} />
         ) : null}
       </label>
       <label className="relative flex flex-col col-span-3 text-xs tracking-widest h-fit whitespace-nowrap">
@@ -55,7 +55,7 @@ export default function Form({
         <div className="flex flex-row gap-3">
           <input
             className={`w-[4.5rem] border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline outline-2 ${
-              errorThrown.expirationMonth
+              errorMessage.expirationMonth
                 ? "outline-errorRed border-transparent"
                 : "outline-transparent active:outline-darkGrayViolet focus:outline-darkGrayViolet"
             }`}
@@ -68,7 +68,7 @@ export default function Form({
           />
           <input
             className={`w-[4.5rem] border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline outline-2 ${
-              errorThrown.expirationYear
+              errorMessage.expirationYear
                 ? "outline-errorRed border-transparent"
                 : "outline-transparent active:outline-darkGrayViolet focus:outline-darkGrayViolet"
             }`}
@@ -80,9 +80,11 @@ export default function Form({
             value={expirationYear}
           />
         </div>
-        {errorThrown.expirationMonth || errorThrown.expirationYear ? (
+        {errorMessage.expirationMonth || errorMessage.expirationYear ? (
           <ErrorLabel
-            message={errorThrown.expirationMonth || errorThrown.expirationYear}
+            message={
+              errorMessage.expirationMonth || errorMessage.expirationYear
+            }
           />
         ) : null}
       </label>
@@ -90,7 +92,7 @@ export default function Form({
         CVC
         <input
           className={`border border-lightGrayViolet rounded-md px-4 py-2 mt-2 text-[18px] outline outline-2 ${
-            errorThrown.cvcNumber
+            errorMessage.cvcNumber
               ? "outline-errorRed border-transparent"
               : "outline-transparent active:outline-darkGrayViolet focus:outline-darkGrayViolet"
           }`}
@@ -101,8 +103,8 @@ export default function Form({
           onChange={handleChange}
           value={cvcNumber}
         />
-        {errorThrown.cvcNumber ? (
-          <ErrorLabel message={errorThrown.cvcNumber} />
+        {errorMessage.cvcNumber ? (
+          <ErrorLabel message={errorMessage.cvcNumber} />
         ) : null}
       </label>
       <button

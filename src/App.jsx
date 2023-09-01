@@ -4,15 +4,15 @@ import CompleteVerification from "./components/CompleteVerification";
 import { useState } from "react";
 
 function App() {
-  const [errorThrown, setErrorThrown] = useState({
+  const [errorMessage, setErrorMessage] = useState({
     name: "",
     cardNumber: "",
     expirationMonth: "",
     expirationYear: "",
     cvcNumber: "",
   });
-  const [isFirstRender, setIsFirstRender] = useState(true);
-  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [isFirstCheck, setIsFirstCheck] = useState(true);
+  const [isVerified, setIsVerified] = useState(false);
   const [cardInfo, setCardInfo] = useState({
     name: "",
     cardNumber: "",
@@ -25,101 +25,138 @@ function App() {
   function handleChange(e) {
     setCardInfo((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
-  function handleConfirm() {
+  function checkName() {
     if (cardInfo.name.length === 0) {
-      setErrorThrown((prev) => ({ ...prev, name: "Can't be blank" }));
+      setErrorMessage((prev) => ({ ...prev, name: "Can't be blank" }));
+      console.log("error, cannot be blank");
+      return;
     } else {
-      setErrorThrown((prev) => ({
+      setErrorMessage((prev) => ({
         ...prev,
         name: "",
       }));
     }
+  }
+  function checkCardNumber() {
     if (cardInfo.cardNumber.length === 0) {
-      setErrorThrown((prev) => ({ ...prev, cardNumber: "Can't be blank" }));
+      setErrorMessage((prev) => ({ ...prev, cardNumber: "Can't be blank" }));
+      console.log("error, cannot be blank");
+      return;
     } else if (cardInfo.cardNumber.length != 16) {
-      setErrorThrown((prev) => ({ ...prev, cardNumber: "Incomplete field" }));
+      setErrorMessage((prev) => ({ ...prev, cardNumber: "Incomplete field" }));
+      return;
     } else if (isNaN(cardInfo.cardNumber)) {
-      setErrorThrown((prev) => ({
+      setErrorMessage((prev) => ({
         ...prev,
         cardNumber: "Wrong format, numbers only",
       }));
+      return;
     } else {
-      setErrorThrown((prev) => ({
+      setErrorMessage((prev) => ({
         ...prev,
         cardNumber: "",
       }));
     }
+  }
+  function checkExpirationMonth() {
     if (cardInfo.expirationMonth.length === 0) {
-      setErrorThrown((prev) => ({
+      setErrorMessage((prev) => ({
         ...prev,
         expirationMonth: "Can't be blank",
       }));
+      console.log("error, cannot be blank");
+      return;
     } else if (cardInfo.expirationMonth.length != 2) {
-      setErrorThrown((prev) => ({
+      setErrorMessage((prev) => ({
         ...prev,
         expirationMonth: "Incomplete field",
       }));
+      return;
     } else if (isNaN(cardInfo.expirationMonth)) {
-      setErrorThrown((prev) => ({
+      setErrorMessage((prev) => ({
         ...prev,
         expirationMonth: "Wrong format, numbers only",
       }));
+      return;
     } else {
-      setErrorThrown((prev) => ({
+      setErrorMessage((prev) => ({
         ...prev,
         expirationMonth: "",
       }));
     }
-
+  }
+  function checkExpirationYear() {
     if (cardInfo.expirationYear.length === 0) {
-      setErrorThrown((prev) => ({ ...prev, expirationYear: "Can't be blank" }));
+      setErrorMessage((prev) => ({
+        ...prev,
+        expirationYear: "Can't be blank",
+      }));
+      console.log("error, cannot be blank");
+      return;
     } else if (cardInfo.expirationYear.length != 2) {
-      setErrorThrown((prev) => ({
+      setErrorMessage((prev) => ({
         ...prev,
         expirationYear: "Incomplete field",
       }));
+      return;
     } else if (isNaN(cardInfo.expirationYear)) {
-      setErrorThrown((prev) => ({
+      setErrorMessage((prev) => ({
         ...prev,
         expirationYear: "Wrong format, numbers only",
       }));
+      return;
     } else {
-      setErrorThrown((prev) => ({
+      setErrorMessage((prev) => ({
         ...prev,
         expirationYear: "",
       }));
     }
-
+  }
+  function checkCVCNumber() {
     if (cardInfo.cvcNumber.length === 0) {
-      setErrorThrown((prev) => ({ ...prev, cvcNumber: "Can't be blank" }));
+      setErrorMessage((prev) => ({ ...prev, cvcNumber: "Can't be blank" }));
+      console.log("error, cannot be blank");
+      return;
     } else if (cardInfo.cvcNumber.length != 3) {
-      setErrorThrown((prev) => ({ ...prev, cvcNumber: "Incomplete field" }));
+      setErrorMessage((prev) => ({ ...prev, cvcNumber: "Incomplete field" }));
+      return;
     } else if (isNaN(cardInfo.cvcNumber)) {
-      setErrorThrown((prev) => ({
+      setErrorMessage((prev) => ({
         ...prev,
         cvcNumber: "Wrong format, numbers only",
       }));
+      return;
     } else {
-      setErrorThrown((prev) => ({
+      setErrorMessage((prev) => ({
         ...prev,
         cvcNumber: "",
       }));
     }
-    setIsFirstRender(false);
+  }
+
+  function handleConfirm() {
+    checkName();
+    checkCardNumber();
+    checkExpirationMonth();
+    checkExpirationYear();
+    checkCVCNumber();
+
     if (
-      !errorThrown.name &&
-      !errorThrown.cardNumber &&
-      !errorThrown.expirationMonth &&
-      !errorThrown.expirationYear &&
-      !errorThrown.cvcNumber &&
-      !isFirstRender
+      !errorMessage.name &&
+      !errorMessage.cardNumber &&
+      !errorMessage.expirationMonth &&
+      !errorMessage.expirationYear &&
+      !errorMessage.cvcNumber &&
+      !isFirstCheck
     ) {
-      setIsConfirmed(true);
-      alert("this is where we fire the render complete element");
+      console.log("either blank error message or all clear");
+      setIsVerified(true);
+      alert("this is where we fire the Check complete element");
     }
+    setIsFirstCheck(false);
   }
   function handleComplete() {
-    alert("continue pressed");
+    console.log("continue pressed");
   }
   const formattedCardNumber = () => {
     let string = "";
@@ -157,7 +194,7 @@ function App() {
           </div>
         </div>
       </div>
-      {isConfirmed ? (
+      {isVerified ? (
         <CompleteVerification handleComplete={handleComplete} />
       ) : (
         <Form
@@ -166,7 +203,7 @@ function App() {
           expirationMonth={expirationMonth}
           expirationYear={expirationYear}
           cvcNumber={cvcNumber}
-          errorThrown={errorThrown}
+          errorMessage={errorMessage}
           handleChange={handleChange}
           handleConfirm={handleConfirm}
         />
