@@ -1,7 +1,7 @@
 // import { useState } from "react";
 import Form from "./components/Form";
 import CompleteVerification from "./components/CompleteVerification";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function App() {
   const [errorMessage, setErrorMessage] = useState({
@@ -11,8 +11,9 @@ function App() {
     expirationYear: "",
     cvcNumber: "",
   });
-  const [isFirstCheck, setIsFirstCheck] = useState(true);
+  // const [errorThrown, setIsErrorThrown] = useState(true);
   const [isVerified, setIsVerified] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
   const [cardInfo, setCardInfo] = useState({
     name: "",
     cardNumber: "",
@@ -41,16 +42,13 @@ function App() {
     if (cardInfo.cardNumber.length === 0) {
       setErrorMessage((prev) => ({ ...prev, cardNumber: "Can't be blank" }));
       console.log("error, cannot be blank");
-      return;
     } else if (cardInfo.cardNumber.length != 16) {
       setErrorMessage((prev) => ({ ...prev, cardNumber: "Incomplete field" }));
-      return;
     } else if (isNaN(cardInfo.cardNumber)) {
       setErrorMessage((prev) => ({
         ...prev,
         cardNumber: "Wrong format, numbers only",
       }));
-      return;
     } else {
       setErrorMessage((prev) => ({
         ...prev,
@@ -65,19 +63,16 @@ function App() {
         expirationMonth: "Can't be blank",
       }));
       console.log("error, cannot be blank");
-      return;
     } else if (cardInfo.expirationMonth.length != 2) {
       setErrorMessage((prev) => ({
         ...prev,
         expirationMonth: "Incomplete field",
       }));
-      return;
     } else if (isNaN(cardInfo.expirationMonth)) {
       setErrorMessage((prev) => ({
         ...prev,
         expirationMonth: "Wrong format, numbers only",
       }));
-      return;
     } else {
       setErrorMessage((prev) => ({
         ...prev,
@@ -92,19 +87,16 @@ function App() {
         expirationYear: "Can't be blank",
       }));
       console.log("error, cannot be blank");
-      return;
     } else if (cardInfo.expirationYear.length != 2) {
       setErrorMessage((prev) => ({
         ...prev,
         expirationYear: "Incomplete field",
       }));
-      return;
     } else if (isNaN(cardInfo.expirationYear)) {
       setErrorMessage((prev) => ({
         ...prev,
         expirationYear: "Wrong format, numbers only",
       }));
-      return;
     } else {
       setErrorMessage((prev) => ({
         ...prev,
@@ -116,16 +108,13 @@ function App() {
     if (cardInfo.cvcNumber.length === 0) {
       setErrorMessage((prev) => ({ ...prev, cvcNumber: "Can't be blank" }));
       console.log("error, cannot be blank");
-      return;
     } else if (cardInfo.cvcNumber.length != 3) {
       setErrorMessage((prev) => ({ ...prev, cvcNumber: "Incomplete field" }));
-      return;
     } else if (isNaN(cardInfo.cvcNumber)) {
       setErrorMessage((prev) => ({
         ...prev,
         cvcNumber: "Wrong format, numbers only",
       }));
-      return;
     } else {
       setErrorMessage((prev) => ({
         ...prev,
@@ -140,23 +129,11 @@ function App() {
     checkExpirationMonth();
     checkExpirationYear();
     checkCVCNumber();
-
-    if (
-      !errorMessage.name &&
-      !errorMessage.cardNumber &&
-      !errorMessage.expirationMonth &&
-      !errorMessage.expirationYear &&
-      !errorMessage.cvcNumber &&
-      !isFirstCheck
-    ) {
-      console.log("either blank error message or all clear");
-      setIsVerified(true);
-      alert("this is where we fire the Check complete element");
-    }
-    setIsFirstCheck(false);
+    setIsChecked(true);
+    // setIsFirstCheck(false);
   }
   function handleComplete() {
-    console.log("continue pressed");
+    setIsVerified(false);
   }
   const formattedCardNumber = () => {
     let string = "";
@@ -165,6 +142,23 @@ function App() {
     }
     return string;
   };
+  function completeVerification() {
+    setIsVerified(true);
+  }
+  useEffect(() => {
+    if (
+      !errorMessage.name &&
+      !errorMessage.cardNumber &&
+      !errorMessage.expirationMonth &&
+      !errorMessage.expirationYear &&
+      !errorMessage.cvcNumber &&
+      isChecked
+    ) {
+      // alert("this is where we fire the Check complete element");
+      completeVerification();
+    }
+  }, [errorMessage, isChecked]);
+
   return (
     <div className="flex flex-col h-screen 2xl:flex-row">
       <div className="flex items-center bg-[url('/images/bg-main-mobile.png')] bg-cover w-screen h-2/6 2xl:bg-[url('/images/bg-main-desktop.png')] 2xl:h-screen 2xl:w-2/6">
