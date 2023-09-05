@@ -163,12 +163,12 @@ function App() {
     <div className="flex flex-col h-screen 2xl:flex-row">
       <div className="flex items-center bg-[url('/images/bg-main-mobile.png')] bg-cover w-screen h-2/6 2xl:bg-[url('/images/bg-main-desktop.png')] 2xl:h-screen 2xl:w-2/6">
         <div className="relative w-full max-w-[375px] min-h-[222px] max-h-[667px] mx-auto 2xl:max-w-full 2xl:h-[434px] 2xl:max-h-full">
-          <div className="absolute bg-[url('/images/bg-card-back.png')] bg-cover top-[1.75rem] right-[1.125rem] w-[279px] h-[153px] text-lightGrayViolet 2xl:top-auto 2xl:bottom-[16rem] 2xl:-right-[8.75rem] 2xl:scale-110">
+          <div className="absolute bg-[url('/images/bg-card-back.png')] bg-cover top-[1.75rem] right-[1.125rem] w-[279px] h-[153px] text-lightGrayViolet 2xl:bottom-auto 2xl:top-[16rem] 2xl:-right-[8.75rem] 2xl:scale-125">
             <p className="absolute top-[4.175rem] right-[2.4rem] text-[10px] tracking-widest">
               {cardInfo.cvcNumber ? cardInfo.cvcNumber : "000"}
             </p>
           </div>
-          <div className="absolute bg-[url('/images/bg-card-front.png')] bg-cover bottom-[-2.875rem] left-[1.125rem] w-[279px] h-[153px] text-lightGrayViolet p-5 2xl:bottom-auto 2xl:top-[16rem] 2xl:left-auto 2xl:-right-[5rem] 2xl:scale-110">
+          <div className="absolute bg-[url('/images/bg-card-front.png')] bg-cover bottom-[-2.875rem] left-[1.125rem] w-[279px] h-[153px] text-lightGrayViolet p-5 2xl:top-auto 2xl:bottom-[16rem] 2xl:left-auto 2xl:-right-[5rem] 2xl:scale-125">
             <img className="h-[2rem] w-auto" src="/images/card-logo.svg"></img>
             <p className="pt-8 text-lg font-medium tracking-widest">
               {formattedCardNumber()
